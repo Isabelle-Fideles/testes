@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seu resultado</title>
+
+<style>
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#ff4b7d,#ff0033);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+max-width:500px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#111;
+color:white;
+font-size:16px;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h1>💘 Resultado desbloqueado</h1>
+
+<h2>Romântico Intenso ❤️</h2>
+
+<p>
+Você ama profundamente e se entrega rápido.
+Seu desafio é não criar expectativas em quem
+não demonstra o mesmo nível emocional.
+</p>
+
+<p>
+Dica: pessoas com seu perfil atraem relações
+intensas em 2026. Escolha melhor quem entra.
+</p>
+
+<button onclick="compartilhar()">Compartilhar com crush 😏</button>
+</div>
+
+<script>
+function compartilhar(){
+let texto="Fiz esse teste e o resultado foi bizarro 😳 faz:";
+let url="COLE_AQUI_SEU_LINK";
+
+navigator.clipboard.writeText(texto+" "+url);
+alert("Link copiado!");
+}
+</script>
+
+</body>
+</html>

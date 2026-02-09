@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste profundo do amor</title>
+
+<style>
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:linear-gradient(135deg,#ff4b7d,#ff0033);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+margin:0;
+padding:20px;
+}
+
+.container{width:100%;max-width:480px;}
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+animation:fade .4s;
+}
+
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+.hidden{display:none;}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#ff2e63;
+color:white;
+font-size:17px;
+margin-top:14px;
+cursor:pointer;
+}
+button:hover{background:#e6004c;}
+
+.box{
+background:#ffe8ee;
+padding:15px;
+border-radius:12px;
+margin:20px 0;
+font-size:15px;
+}
+
+.share{background:#111;}
+.small{font-size:13px;color:#777;margin-top:10px}
+
+.progress{
+height:8px;background:#eee;border-radius:20px;margin-bottom:20px;overflow:hidden}
+.bar{
+height:100%;width:0%;background:#ff2e63;transition:.4s
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- LANDING -->
+<div id="landing" class="card">
+<h1>💘 Teste profundo do amor</h1>
+<p>Descubra seu padrão emocional, bloqueios e como atrair a pessoa certa</p>
+<button onclick="startTest()">Começar teste</button>
+<div class="small">+ de 12 mil pessoas já fizeram</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="card hidden">
+<div class="progress"><div class="bar" id="bar"></div></div>
+<h2 id="question"></h2>
+<div id="answers"></div>
+</div>
+
+<!-- PAYWALL -->
+<div id="paywall" class="card hidden">
+<h2>🔒 Seu resultado completo está pronto</h2>
+<p>Analisamos suas respostas e detectamos seu padrão emocional no amor.</p>
+
+<div class="box">
+✔ Seu perfil amoroso dominante<br>
+✔ Seu bloqueio emocional secreto<br>
+✔ O tipo de pessoa que você atrai<br>
+✔ Dicas personalizadas para 2026<br>
+✔ Como melhorar sua vida amorosa
+</div>
+
+<button onclick="pagar()">Desbloquear resultado completo — R$5</button>
+<div class="small">Acesso imediato • pagamento único</div>
+</div>
+
+<!-- RESULTADO -->
+<div id="result" class="card hidden">
+<h2>Seu perfil amoroso:</h2>
+<h1 id="profile"></h1>
+
+<div id="explicacao" class="box"></div>
+
+<div id="dicas" class="box"></div>
+
+<button class="share" onclick="compartilhar()">Compartilhar com amigos ou crush 💌</button>
+</div>
+
+</div>
+
+<script>
+let step=0;
+let answers=[];
+
+// COLE LINK CHECKOUT KIWIFY
+let linkPagamento="https://pay.kiwify.com.br/0ZPP03C";
+
+const questions=[
+{q:"Quando você se apaixona:",a:["Se entrega rápido","Vai com calma","Evita sentir"]},
+{q:"Você manda mensagem primeiro?",a:["Sempre","Às vezes","Quase nunca"]},
+{q:"Seu maior medo no amor:",a:["Traição","Rejeição","Perder liberdade"]},
+{q:"Em discussões você:",a:["Explode","Conversa","Se afasta"]},
+{q:"Você se apega fácil?",a:["Muito","Médio","Difícil"]},
+{q:"Relacionamentos passados:",a:["Intensos","Equilibrados","Conturbados"]},
+{q:"Você acredita em destino amoroso?",a:["Sim","Talvez","Não"]},
+{q:"Ciúmes:",a:["Alto","Normal","Quase nenhum"]}
+];
+
+function startTest(){
+document.getElementById("landing").classList.add("hidden");
+document.getElementById("quiz").classList.remove("hidden");
+showQuestion();
+}
+
+function showQuestion(){
+let q=questions[step];
+document.getElementById("question").innerText=q.q;
+
+let percent=(step/questions.length)*100;
+document.getElementById("bar").style.width=percent+"%";
+
+let html="";
+q.a.forEach((opt,i)=>{
+html+=`<button onclick="answer(${i})">${opt}</button>`;
+});
+
+document.getElementById("answers").innerHTML=html;
+}
+
+function answer(i){
+answers.push(i);
+step++;
+
+if(step<questions.length){
+showQuestion();
+}else{
+document.getElementById("quiz").classList.add("hidden");
+document.getElementById("paywall").classList.remove("hidden");
+}
+}
+
+function pagar(){
+window.location.href = linkPagamento;
+}
+
+
+window.open(linkPagamento,"_blank");
+
+setTimeout(()=>{
+mostrarResultado();
+},4000);
+}
+
+function mostrarResultado(){
+document.getElementById("paywall").classList.add("hidden");
+document.getElementById("result").classList.remove("hidden");
+
+let total=answers.reduce((a,b)=>a+b,0);
+let perfil="";
+let explicacao="";
+let dicas="";
+
+if(total<=6){
+perfil="Romântico Intenso ❤️";
+explicacao="Você ama profundamente e se entrega rápido. Vive relações intensas e emocionais, mas pode se machucar por esperar muito das pessoas.";
+dicas="• Não se entregue tão rápido\n• Observe atitudes, não palavras\n• Escolha quem demonstra reciprocidade\n• Evite criar expectativas irreais";
+}
+else if(total<=12){
+perfil="Emocional Equilibrado 💞";
+explicacao="Você busca estabilidade e conexão real. Tem grande potencial para relacionamentos saudáveis e duradouros.";
+dicas="• Continue se comunicando bem\n• Evite guardar sentimentos\n• Busque pessoas maduras\n• Relacionamentos estáveis favorecem você";
+}
+else{
+perfil="Coração Independente 🔥";
+explicacao="Você valoriza liberdade e se protege emocionalmente. Pode parecer distante, mas quando confia, ama de forma verdadeira.";
+dicas="• Permita-se sentir mais\n• Nem todos vão te machucar\n• Demonstre interesse\n• Relacionamentos leves funcionam melhor";
+}
+
+document.getElementById("profile").innerText=perfil;
+document.getElementById("explicacao").innerText=explicacao;
+document.getElementById("dicas").innerText=dicas;
+}
+
+function compartilhar(){
+let texto="Fiz esse teste de personalidade do amor e o resultado me chocou 😳 faz também:";
+let url=window.location.href;
+
+if(navigator.share){
+navigator.share({title:"Teste do Amor",text:texto,url:url});
+}else{
+navigator.clipboard.writeText(texto+" "+url);
+alert("Link copiado! envia pro crush 😏");
+}
+}
+</script>
+</body>
+</html>
